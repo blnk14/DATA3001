@@ -1,8 +1,8 @@
 nsw <- read.csv(file = 'nsw.csv', header = TRUE)
 qld <- read.csv(file = 'qld.csv', header = TRUE)
 vic <- read.csv(file = 'vic.csv', header = TRUE)
-sa <- read.csv(file = 'sa', header = TRUE)
-tas <- read.csv(file = 'tas', header = TRUE)
+sa <- read.csv(file = 'sa.csv', header = TRUE)
+tas <- read.csv(file = 'tas.csv', header = TRUE)
 
 #install
 install.packages('rattle')
