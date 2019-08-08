@@ -45,7 +45,7 @@ nsw <- within(nsw, Public.Holiday <- relevel(Public.Holiday, ref = "Nil"))
 nsw <- within(nsw, Day.of.week <- relevel(Day.of.week, ref = "Monday"))
 
 #Grow Regression Tree
-nsw_tree <- rpart(Total.Demand~Public.Holiday, method = "anova", data = nsw)
+nsw_tree <- rpart(Total.Demand~Public.Holiday+Day.of.week+Time+Year+Month+Day, method = "anova", data = nsw)
 
 #Display results
 printcp(nsw_tree)
@@ -73,3 +73,5 @@ pnsw_tree<- prune(nsw_tree, cp=0.010000) # from cptable
 fancyRpartPlot(pnsw_tree, uniform=TRUE, 
                main="Pruned Regression Tree for Demand")
 text(pnsw_tree, use.n=TRUE, all=TRUE, cex=.8)
+
+summary(pnsw_tree)
