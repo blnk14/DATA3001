@@ -1,8 +1,8 @@
 nsw <- read.csv(file = 'nsw.csv', header = TRUE)
 qld <- read.csv(file = 'qld.csv', header = TRUE)
 vic <- read.csv(file = 'vic.csv', header = TRUE)
-sa <- read.csv(file = 'sa', header = TRUE)
-tas <- read.csv(file = 'tas', header = TRUE)
+sa <- read.csv(file = 'sa.csv', header = TRUE)
+tas <- read.csv(file = 'tas.csv', header = TRUE)
 
 library(ggplot2)
 
@@ -44,6 +44,9 @@ nsw_lm2 <- lm(Total.Demand~Day.of.week, data = nsw)
 summary(nsw_lm2)
 anova(nsw_lm2)
 
+nsw_lm3 <- lm(Total.Demand~Temperature + Month, data = nsw)
+summary(nsw_lm3)
+
 nsw_total <- lm(Total.Demand~Temperature+Public.Holiday+Day.of.week+Time+Year+Month+Day, data = nsw)
 summary(nsw_total)
 par(mfrow = (c(2,2))) 
@@ -51,6 +54,12 @@ plot(nsw_total)
 
 nsw_temp <- lm(Total.Demand~Temperature, data = nsw)
 summary(nsw_temp)
+
+
+
+
+
+
 
 
 
