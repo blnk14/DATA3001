@@ -55,14 +55,65 @@ plot(nsw_total)
 nsw_temp <- lm(Total.Demand~Temperature, data = nsw)
 summary(nsw_temp)
 
+#Demand ~ Temperature Plot Separated By Different Types of Public Holidays
+min(nsw$Temperature)
+max(nsw$Temperature)
+min(nsw$Total.Demand)
+max(nsw$Total.Demand)
 
+check_nil <- dplyr::filter(nsw, grepl('Nil', Public.Holiday))
+check_obs <- dplyr::filter(nsw, grepl('Observed', Public.Holiday))
+check_week <- dplyr::filter(nsw, grepl('Weekend', Public.Holiday))
+check_pub <- dplyr::filter(nsw, !grepl('Observed|Weekend|Nil', Public.Holiday))
 
+par(mfrow = (c(2,2)))
+plot(Total.Demand ~ Temperature, data = check_nil, xlim = range(-5:45), ylim = range(5000:14000), main = "No Holiday")
+plot(Total.Demand ~ Temperature, data = check_obs, xlim = range(-5:45), ylim = range(5000:14000), main = "Observed Holiday")
+plot(Total.Demand ~ Temperature, data = check_week, main = "Weekend Holiday", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_pub, main = "Public Holiday", xlim = range(-5:45), ylim = range(5000:14000))
 
+#Demand ~ Temperature Plot Separated By Seasonality
+nsw$Month.N <- month.abb[nsw$Month]
 
+#Season
+check_sum <- dplyr::filter(nsw, grepl('Jan|Feb|Dec', Month.N))
+check_aut <- dplyr::filter(nsw, grepl('Mar|Apr|May', Month.N))
+check_win <- dplyr::filter(nsw, grepl('Jun|Jul|Aug', Month.N))
+check_spr <- dplyr::filter(nsw, grepl('Sep|Oct|Nov', Month.N))
 
+par(mfrow = (c(2,2)))
+plot(Total.Demand ~ Temperature, data = check_sum, main = "Summer", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_aut, main = "Autumn", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_win, main = "Winter", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_spr, main = "Spring", xlim = range(-5:45), ylim = range(5000:14000))
 
+#Month
+check_jan <- dplyr::filter(nsw, grepl('Jan', Month.N))
+check_feb <- dplyr::filter(nsw, grepl('Feb', Month.N))
+check_mar <- dplyr::filter(nsw, grepl('Mar', Month.N))
+check_apr <- dplyr::filter(nsw, grepl('Apr', Month.N))
+check_may <- dplyr::filter(nsw, grepl('May', Month.N))
+check_jun <- dplyr::filter(nsw, grepl('Jun', Month.N))
+check_jul <- dplyr::filter(nsw, grepl('Jul', Month.N))
+check_aug <- dplyr::filter(nsw, grepl('Aug', Month.N))
+check_sep <- dplyr::filter(nsw, grepl('Sep', Month.N))
+check_oct <- dplyr::filter(nsw, grepl('Oct', Month.N))
+check_nov <- dplyr::filter(nsw, grepl('Nov', Month.N))
+check_dec <- dplyr::filter(nsw, grepl('Dec', Month.N))
 
+par(mfrow=c(1,3))
+plot(Total.Demand ~ Temperature, data = check_dec, main = "December", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_jan, main = "January", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_feb, main = "February", xlim = range(-5:45), ylim = range(5000:14000))
 
+plot(Total.Demand ~ Temperature, data = check_mar, main = "March", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_apr, main = "April", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_may, main = "May", xlim = range(-5:45), ylim = range(5000:14000))
 
+plot(Total.Demand ~ Temperature, data = check_jun, main = "June", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_jul, main = "July", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_aug, main = "August", xlim = range(-5:45), ylim = range(5000:14000))
 
-
+plot(Total.Demand ~ Temperature, data = check_sep, main = "September", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_oct, main = "October", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ Temperature, data = check_nov, main = "November", xlim = range(-5:45), ylim = range(5000:14000))
