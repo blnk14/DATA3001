@@ -102,10 +102,10 @@ check_win <- dplyr::filter(nsw, grepl('Jun|Jul|Aug', Month.N))
 check_spr <- dplyr::filter(nsw, grepl('Sep|Oct|Nov', Month.N))
 
 par(mfrow = (c(2,2)))
-plot(Total.Demand ~ Temperature, data = check_sum, main = "Summer", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_aut, main = "Autumn", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_win, main = "Winter", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_spr, main = "Spring", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_sum, main = "Summer", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_aut, main = "Autumn", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_win, main = "Winter", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_spr, main = "Spring", xlim = range(-5:45), ylim = range(5000:14000))
 
 #Month
 check_jan <- dplyr::filter(nsw, grepl('Jan', Month.N))
@@ -126,19 +126,19 @@ par(mfrow=c(1,3))
 
 #By Year
 par(mfrow=c(4,3))
-plot(Total.Demand ~ Temperature, data = check_dec, main = "December", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_jan, main = "January", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_feb, main = "February", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_dec, main = "December", xlim = range(1:31), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_jan, main = "January", xlim = range(1:31), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_feb, main = "February", xlim = range(1:31), ylim = range(5000:14000))
 
-plot(Total.Demand ~ Temperature, data = check_mar, main = "March", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_apr, main = "April", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_may, main = "May", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_mar, main = "March", xlim = range(1:31), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_apr, main = "April", xlim = range(1:31), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_may, main = "May", xlim = range(1:31), ylim = range(5000:14000))
 
-plot(Total.Demand ~ Temperature, data = check_jun, main = "June", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_jul, main = "July", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_aug, main = "August", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_jun, main = "June", xlim = range(1:31), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_jul, main = "July", xlim = range(1:31), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_aug, main = "August", xlim = range(1:31), ylim = range(5000:14000))
 
-plot(Total.Demand ~ Temperature, data = check_sep, main = "September", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_oct, main = "October", xlim = range(-5:45), ylim = range(5000:14000))
-plot(Total.Demand ~ Temperature, data = check_nov, main = "November", xlim = range(-5:45), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_sep, main = "September", xlim = range(1:31), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_oct, main = "October", xlim = range(1:31), ylim = range(5000:14000))
+plot(Total.Demand ~ dayofmonth, data = check_nov, main = "November", xlim = range(1:31), ylim = range(5000:14000))
 
