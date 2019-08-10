@@ -16,10 +16,7 @@ nsw$Time.N <- (as.numeric(nsw$Time) - 1)/2
 for (i in 1:nrow(nsw)) {
   nsw$count[i] <- i
 }
-
-#To do
 nsw$Is.Public.Holiday <- nsw$Public.Holiday != "Nil"
-nsw$Is.Observed.Holiday
-nsw$Is.Weekend.Holiday
-
+nsw_train <- subset(nsw, Year != 2018)
+nsw_test <- subset(nsw, Year == 2018)
 

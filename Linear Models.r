@@ -50,13 +50,30 @@ summary(nsw_lm3)
 nsw_lm4 <- lm(Total.Demand~Time, data = nsw)
 summary(nsw_lm4)
 
-nsw_total <- lm(Total.Demand~Temperature+Public.Holiday+Day.of.week+Time+Year+Month+Day, data = nsw)
+nsw_total <- lm(Total.Demand~Temperature+Is.Public.Holiday+Day.of.week+Time+Year+Month+Day+dayofyear+Weekend+Off.Peak+Peak+Shoulder, data = nsw)
 summary(nsw_total)
 par(mfrow = (c(2,2))) 
 plot(nsw_total)
 
+predict_lm <- predict.lm(nsw_total, nsw_test)
+accuracy_lm <- function(lm) {
+  predict_lm <- predict.lm(lm, nsw_test)
+  actual_value <- nsw_test$Total.Demand
+  accuracy_test <- mape(actual_value, predict_lm)
+  print(paste('Accuracy for LM', 100-accuracy_test*100,'%'))
+}
+accuracy_lm(nsw_total)
+
+lm_error <- vector(mode="integer", length=17494)
+for(i in 1:17494){
+  lm_error[i] <- ape(actual_value[i], predict_lm[i])
+  lm_error[i] <- lm_error[i]*100
+}
+ggplot(nsw_test, aes(dayofyear, lm_error)) + geom_smooth() + xlab("Day") + ylab("Error (%)") + ggtitle("Linear Model Mean Absolute Error Percentage") + theme_ts
+
 nsw_temp <- lm(Total.Demand~Temperature, data = nsw)
 summary(nsw_temp)
+
 
 #Demand ~ Temperature Plot Separated By Different Types of Public Holidays
 min(nsw$Temperature)

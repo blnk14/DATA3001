@@ -110,14 +110,25 @@ print(paste('Accuracy for test', 100-accuracy_test*100,'%'))
 #Function to tune tree
 
 accuracy_tune <- function(tree) {
+  tree<- prune(tree, cp=nsw_tree$cptable[which.min(tree$cptable[,"xerror"]),"CP"]) # from cptable 
   predict_tree <- predict(tree, nsw_test, type = 'vector')
   actual_value <- nsw_test$Total.Demand
   accuracy_test <- mape(actual_value, predict_tree)
   print(paste('Accuracy for tree', 100-accuracy_test*100,'%'))
 }
 
+#Plot accuracy graph over time
+tree_error <- vector(mode="integer", length=17494)
+for(i in 1:17494){
+  tree_error[i] <- ape(actual_value[i], predict_tree[i])
+  tree_error[i] <- tree_error[i]*100
+}
+ggplot(nsw_test, aes(dayofyear, tree_error)) + geom_smooth() + xlab("Day") + ylab("Error (%)") + ggtitle("Regression Tree Mean Absolute Error Percentage") + theme_ts
+
+#Accuracy vector of trees with different predictors
 accuracy_tune(nsw_tree2)
 accuracy_tune(nsw_tree)
 pred_acc <- c(accuracy_tune(nsw_controltree), accuracy_tune(pnsw_tree), accuracy_tune(nsw_pubtree),accuracy_tune(nsw_temptree),accuracy_tune(nsw_wkdtree),accuracy_tune(nsw_opeaktree),accuracy_tune(nsw_peaktree),accuracy_tune(nsw_shrtree),accuracy_tune(nsw_timtree),accuracy_tune(nsw_montree),accuracy_tune(nsw_doytree),accuracy_tune(nsw_dowtree),accuracy_tune(nsw_yeartree))
 sort(pred_acc)
 order(pred_acc)
+
