@@ -47,6 +47,9 @@ anova(nsw_lm2)
 nsw_lm3 <- lm(Total.Demand~Temperature + Month, data = nsw)
 summary(nsw_lm3)
 
+nsw_lm4 <- lm(Total.Demand~Time, data = nsw)
+summary(nsw_lm4)
+
 nsw_total <- lm(Total.Demand~Temperature+Public.Holiday+Day.of.week+Time+Year+Month+Day, data = nsw)
 summary(nsw_total)
 par(mfrow = (c(2,2))) 
@@ -101,7 +104,11 @@ check_oct <- dplyr::filter(nsw, grepl('Oct', Month.N))
 check_nov <- dplyr::filter(nsw, grepl('Nov', Month.N))
 check_dec <- dplyr::filter(nsw, grepl('Dec', Month.N))
 
+#By season
 par(mfrow=c(1,3))
+
+#By Year
+par(mfrow=c(4,3))
 plot(Total.Demand ~ Temperature, data = check_dec, main = "December", xlim = range(-5:45), ylim = range(5000:14000))
 plot(Total.Demand ~ Temperature, data = check_jan, main = "January", xlim = range(-5:45), ylim = range(5000:14000))
 plot(Total.Demand ~ Temperature, data = check_feb, main = "February", xlim = range(-5:45), ylim = range(5000:14000))
@@ -117,3 +124,4 @@ plot(Total.Demand ~ Temperature, data = check_aug, main = "August", xlim = range
 plot(Total.Demand ~ Temperature, data = check_sep, main = "September", xlim = range(-5:45), ylim = range(5000:14000))
 plot(Total.Demand ~ Temperature, data = check_oct, main = "October", xlim = range(-5:45), ylim = range(5000:14000))
 plot(Total.Demand ~ Temperature, data = check_nov, main = "November", xlim = range(-5:45), ylim = range(5000:14000))
+
