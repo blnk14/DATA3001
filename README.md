@@ -4,6 +4,7 @@ Intro and Linear Model:
 -Make more gg plots between demand and most variables
 -More in depth on public holiday
 -Control some variables
+-Fit a linear model of Demand~Weekend+Time.N
 
 GAM:
 -More plots
